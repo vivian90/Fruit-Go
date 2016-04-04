@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="fruitApp">
+	 <head>
+	 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" >
+        <link rel="stylesheet" href="main.css">
+     </head>	
+	<body>
+        <h1>Fruit Go</h1>
+		<ul class="nav nav-tabs">
+            <li><a href="#/" class="active">Fruit List</a></li>
+            <li><a href="#/addfruit">Add My Fruit</a></li>
+            <li role="presentation" class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                  About <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="menu.html">Fruit Menu</a></li>
+                    <li><a href="share.html">Fruit to Share</a></li>
+                </ul>
+            </li>
+        </ul>
+        
+        <div ui-view></div>
+        
+        <hr>
+    <footer>
+       <div class="text-center footer">
+       <h3>Contact Me <span class="glyphicon glyphicon-leaf"></span></h3>
+            <ul class="list-unstyled">
+                <li style="font-size:18px; display:inline; padding-right:60px"><span class="glyphicon glyphicon-envelope"></span> E-mail: weiw2013@gmail.com </li>
+                <li style="font-size:18px; display:inline"><a href="https://github.com/vivian90" target="_blank"><span class="fa fa-github-square" style="text-decoration:underline; color:black"> Github</span> </a></li>
+           </ul>
+       </div>
+    </footer>
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
+    <script src="ui-router.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script src="app_angular.js"></script>
+	</body>
+</html>

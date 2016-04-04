@@ -1,0 +1,13 @@
+<div class="container">
+    <h3>{{fruit.title}}</h3>
+    <h4>Price: {{fruit.price | currency}} <small style="font-style:italic">{{fruit.unit}}</small></h4>
+    <img style="width:300px;height=250px" ng-src="{{fruit.imgurl}}"/>
+    <h5>Producer: {{fruit.producer}}</h5>
+    <div>
+        <lable><h5>Detail: </h5></lable>
+        <p>{{fruit.detail}}</p>
+    </div>
+    <br/>
+    <a class="btn btn-default" ui-sref="editfruit({fruitname:fruit.title})">Edit Info</a>
+    <a class="btn btn-danger" ng-click="remove()">Delete Fruit</a>
+</div>

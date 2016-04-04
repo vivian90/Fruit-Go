@@ -1,0 +1,39 @@
+<div class="container form">
+    <br>
+    <br>
+    <form ng-submit="save(addFruit)">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" class="form-control" id="name" ng-model="addFruit.title" placeholder="name" autofocus/>
+      </div>
+      <div class="form-group">
+        <label for="price">Price:</label>
+        <input type="number" step="0.01" class="form-control" id="price" ng-model="addFruit.price"  placeholder="price"/>
+      </div>
+      <div class="form-group">
+           <label for="unit">Unit:</label>
+           <select class="form-control" ng-model="addFruit.unit">
+                <option value="each">each</option>
+                <option value="/lb">/lb</option>
+                <option value="/box">/box</option>
+                <option value="/bag">/bag</option>
+           </select>
+      </div>
+      <div class="form-group">
+        <label for="imageurl">Fruit ImageURL: </label>
+        <input type="text" id="imageurl" ng-model="addFruit.imgurl"/>
+        <p class="help-block">Help customers to find best fruits.</p>
+      </div>
+      <div class="form-group">
+        <label for="producer">Producer:</label>
+        <input type="text" class="form-control" id="producer" ng-model="addFruit.producer" placeholder="producer"/>
+      </div>
+      <div class="form-group">
+        <label for="detail">Detail:</label>
+        <textarea class="form-control" id="detail" ng-model="addFruit.detail" placeholder="Anything about fruit...">
+          </textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Add Fruit</button>
+      <a class="btn btn-default" ui-sref="homelist">Cancel</a>
+    </form>
+</div>

@@ -3,6 +3,6 @@
         <h4>{{fruit.title}}</h4>
         <li>Price: {{fruit.price | currency}} <small style="font-style:italic">{{fruit.unit}}</small></li>
         <li><img ng-src="{{fruit.imgurl}}" style="height:150px;width:200px"/></li>
-        <a ui-sref="details({fruitname:fruit.title})" class="btn btn-primary">Detail</a>
+        <a ui-sref="details({fruitId:fruit._id})" class="btn btn-primary">Detail</a>
     </ul>
 </div>        

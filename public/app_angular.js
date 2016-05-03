@@ -10,7 +10,7 @@ myApp.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$url
                 controller:'listCtrl'
             })
             .state('details',{
-                url:'/details/:fruitname',
+                url:'/details/:fruitId',
                 templateUrl:'fruitdetails.html',
                 controller:'detailCtrl'
             })
@@ -20,7 +20,7 @@ myApp.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$url
                 controller:'detailCtrl'
             })
             .state('editfruit',{
-                url:'/editfruit/:fruitname',
+                url:'/editfruit/:fruitId',
                 templateUrl:'editfruit.html',
                 controller:'editCtrl'
             })
@@ -35,22 +35,22 @@ myApp.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$url
 }])
 
 .controller('listCtrl', ['$scope','$http', function($scope,$http){
-    $http.get('/fruits').then(function(res){
+    $http.get('/fruits')
+        .then(function(res){
          $scope.fruits = res.data;
     });
 
 }])
 .controller('detailCtrl', ['$http','$scope','$state','$stateParams', function($http,$scope,$state,$stateParams){
-    $http.get('/fruits/' + $stateParams.fruitname).then(function(res){
+    $scope.addFruit = {};
+    $http.get('/fruits/' + $stateParams.fruitId).then(function(res){
         $scope.fruit = res.data;
     });
     
     //Add fruit
     
-    $scope.save = function(addfruit){
-        $scope.addFruit = {};
-    
-        $http.post('/fruits',addfruit).then(function(){
+    $scope.save = function(addFruit){
+        $http.post('/fruits',addFruit).then(function(){
             $scope.addFruit = {};
             $state.go('homelist');
         })
@@ -60,7 +60,7 @@ myApp.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$url
       $scope.remove = function(){
            console.log('delete');
           if(confirm('Are you sure you want to delete it?')){
-             $http.delete('/fruits/'+$stateParams.fruitname).then(function(status){
+             $http.delete('/fruits/'+$stateParams.fruitId).then(function(status){
                 console.log(status);
                 $state.go('homelist');
             })
@@ -69,24 +69,24 @@ myApp.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$url
       };   
 }])
 .controller('editCtrl',['$http','$scope','$state','$stateParams', function($http,$scope,$state,$stateParams){
-      $http.get('/fruits/' +$stateParams.fruitname).then(function(res){
+      $http.get('/fruits/' +$stateParams.fruitId).then(function(res){
           $scope.fruit = res.data;
       });
     //Edit fruit
-    $scope.update = function(fruitname){
-        var data = $scope.fruit;
+    $scope.update = function(){
+        var editfruit = $scope.fruit;
         
-        $http.put('/fruits/'+$stateParams.fruitname, data).then(function(status){
+        $http.put('/fruits/'+$stateParams.fruitId, editfruit).then(function(status){
             $scope.fruit = {};
             $state.go('details', {
-                fruitname: data.title
+                fruitId: editfruit._id
             })
         });
     };
     
     $scope.cancel = function(){
         $state.go('details',{
-            fruitname: $scope.fruit.title
+            fruitId: $scope.fruit._id
         })
     }
     

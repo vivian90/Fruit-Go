@@ -1,4 +1,5 @@
 var MongoClient = require('mongodb').MongoClient;
+var ObjectID = require('mongodb').ObjectId; 
 var assert = require('assert');
 var bodyParser = require('body-parser');
 var express = require('express'),
@@ -24,10 +25,11 @@ MongoClient.connect("mongodb://localhost:27017/fruit", function(err,db){
         
     });
     
-     app.get('/fruits/:name', function(req,res){
+     app.get('/fruits/:id', function(req,res){
          
-        var fruitName = req.params.name;
-         db.collection('fruitlist').findOne({'title':fruitName}, 
+        var id = req.params.id;
+        id = new ObjectID(id);
+         db.collection('fruitlist').findOne({'_id':id}, 
             function(err, fruit){
               res.json(fruit);
         });
@@ -43,9 +45,10 @@ MongoClient.connect("mongodb://localhost:27017/fruit", function(err,db){
         
     });
     
-    app.put('/fruits/:name', function(req,res){
+    app.put('/fruits/:id', function(req,res){
         console.log('edit');
-        var fruitname = req.params.name;
+        var id = req.params.id;
+         id = new ObjectID(id);
         console.log(req.body);
         var updatedfruit = {
             title: req.body.title,
@@ -56,7 +59,7 @@ MongoClient.connect("mongodb://localhost:27017/fruit", function(err,db){
             producer: req.body.producer
         }
         
-        db.collection('fruitlist').update({'title':fruitname},updatedfruit,{upsert: true},
+        db.collection('fruitlist').update({'_id':id},updatedfruit,{upsert: true},
            function(err){
             if(!err){
                 res.send("updated");
@@ -67,10 +70,11 @@ MongoClient.connect("mongodb://localhost:27017/fruit", function(err,db){
     });
     });
         
-     app.delete('/fruits/:name', function(req,res){
+     app.delete('/fruits/:id', function(req,res){
      console.log('delete');
-     var fruitname = req.params.name;         
-     db.collection('fruitlist').remove({'title':fruitname},1,
+     var id = req.params.id;   
+          id = new ObjectID(id);
+     db.collection('fruitlist').remove({'_id':id},1,
         function(err){
              if(!err){
                  res.send("deleted")
